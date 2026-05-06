@@ -98,6 +98,7 @@ def upload():
         # print("file: ",file,"data: ",file_data,"type: ",file_type,"name: ",filename)
         conn = get_db_connection()
         cursor = conn.cursor(dictionary=True)
+        cursor.execute("INSERT INTO files(name,data,mimetype) VALUES(%s,%s,%s)",(filename,file_data,file_type))
         conn.commit()
         cursor.close()
         conn.close()
