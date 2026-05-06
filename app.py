@@ -96,6 +96,11 @@ def upload():
         file_type =file.mimetype
         filename = file.filename
         # print("file: ",file,"data: ",file_data,"type: ",file_type,"name: ",filename)
+        conn = get_db_connection()
+        cursor = conn.cursor(dictionary=True)
+        conn.commit()
+        cursor.close()
+        conn.close()
         return redirect(url_for('home'))
     else:
         return render_template('upload.html')
