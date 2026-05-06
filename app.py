@@ -88,6 +88,8 @@ def home():
 
 @app.route("/upload",methods = ["GET","POST"])
 def upload():
+    if  not session.get('id'):
+      return redirect(url_for('login'))
     if request.method == "POST":
         file = request.files.get('file')
         if not file or file.filename == "":
@@ -98,7 +100,7 @@ def upload():
         # print("file: ",file,"data: ",file_data,"type: ",file_type,"name: ",filename)
         conn = get_db_connection()
         cursor = conn.cursor(dictionary=True)
-        cursor.execute("INSERT INTO files(name,data,mimetype) VALUES(%s,%s,%s)",(filename,file_data,file_type))
+        cursor.execute("INSERT INTO files(name,data,mimetype,poster_id) VALUES(%s,%s,%s)",(filename,file_data,file_type,session['id']))
         conn.commit()
         cursor.close()
         conn.close()
