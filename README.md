@@ -34,12 +34,13 @@
 **files:**
 
 ``` sql
-    +----------+--------------+------+-----+---------+-------+
-    | Field    | Type         | Null | Key | Default | Extra |
-    +----------+--------------+------+-----+---------+-------+
-    | id       | uuid         | NO   | PRI | uuid()  |       |
-    | name     | varchar(255) | NO   |     | NULL    |       |
-    | data     | longtext     | NO   |     | NULL    |       |
-    | mimetype | varchar(255) | NO   |     | NULL    |       |
-    +----------+--------------+------+-----+---------+-------+
+    +-----------+--------------+------+-----+---------+-------+
+    | Field     | Type         | Null | Key | Default | Extra |
+    +-----------+--------------+------+-----+---------+-------+
+    | id        | uuid         | NO   | PRI | uuid()  |       |
+    | name      | varchar(255) | NO   |     | NULL    |       |
+    | data      | longtext     | NO   |     | NULL    |       |
+    | mimetype  | varchar(255) | NO   |     | NULL    |       |
+    | poster_id | uuid         | YES  | MUL | NULL    |       |
+    +-----------+--------------+------+-----+---------+-------+
 ```
