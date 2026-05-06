@@ -6,6 +6,9 @@
     <title>home: {{session['name']}} </title>
 </head>
 <body>
+    <main>
+        <a href="{{url_for('upload')}}"><button>upload file</button></a>
+    </main>
     <a href="{{url_for('logout')}}"><button>logout</button></a>
 </body>
 </html>

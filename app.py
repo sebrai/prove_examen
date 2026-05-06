@@ -21,7 +21,7 @@ def get_db_connection():
         host="127.0.0.1",
         user=user,
         password=pword,
-        database=""
+        database="uploader"
     )
 @app.route("/")
 def blank():
@@ -85,5 +85,19 @@ def home():
     if  not session.get('id'):
       return redirect(url_for('login'))
     return render_template('home.html')
+
+@app.route("/upload",methods = ["GET","POST"])
+def upload():
+    if request.method == "POST":
+        file = request.files.get('file')
+        if not file or file.filename == "":
+             return 'no file uploaded', 400
+        file_data = base64.b64encode(file.read()).decode('utf-8')
+        file_type =file.mimetype
+        filename = file.filename
+        # print("file: ",file,"data: ",file_data,"type: ",file_type,"name: ",filename)
+        return redirect(url_for('home'))
+    else:
+        return render_template('upload.html')
 if __name__ == "__main__":
     app.run(debug=True,host='0.0.0.0', port=5000)

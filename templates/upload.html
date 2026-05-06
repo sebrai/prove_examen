@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>uploader</title>
+</head>
+<body>
+    <form action="{{url_for('upload')}}" method="post" enctype="multipart/form-data" >
+        <input type="file" name="file" id="file" title="file upload here" required>
+        <input type="submit" value="submit file">
+    </form>
+    
+</body>
+</html>
