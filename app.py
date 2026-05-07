@@ -84,7 +84,14 @@ def logout():
 def home():
     if  not session.get('id'):
       return redirect(url_for('login'))
-    return render_template('home.html')
+    
+    conn = get_db_connection()
+    cursor = conn.cursor(dictionary=True)
+    cursor.execute("SELECT id,name, mimetype FROM files WHERE poster_id = %s",(session['id'],))
+    files = cursor.fetchall()
+    cursor.close()
+    conn.close()
+    return render_template('home.html',files= files)
 
 @app.route("/upload",methods = ["GET","POST"])
 def upload():
