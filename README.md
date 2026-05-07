@@ -92,3 +92,20 @@
 - **hashed passwords**
 - **parametered sql**
 - **backups**
+
+### uploaded file
+
+#### get a file
+
+- **path:** *"/get/'file_id' "*
+- **uses:**
+
+``` html
+ <img src="http://host:port/get/file_id">
+```
+
+#### download a file
+
+- **path:** *"/download/'file_id' "*
+- **preview:**
+*image to be placed*
