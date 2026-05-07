@@ -128,3 +128,24 @@ from waitress import serve
 
 serve(app, host='0.0.0.0', port=5000)
 ```
+
+### running
+
+ 1. *requires git to copy*
+
+    ``` Bash
+    winget install --id Git.Git -e --source winget
+    git --version
+    ```
+
+2. *clone the projekt*
+
+    ``` Bash
+    git clone https://github.com/sebrai/prove_examen.git
+    ```
+
+3. *install libraries*
+
+    ``` Bash
+    pip install -r req.txt
+    ```
