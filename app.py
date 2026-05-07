@@ -4,6 +4,7 @@ import mysql.connector
 import os
 import base64
 from dotenv import load_dotenv
+from waitress import serve
 
 load_dotenv()
 

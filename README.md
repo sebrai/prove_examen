@@ -109,3 +109,22 @@
 - **path:** *"/download/'file_id' "*
 - **preview:**
 *image to be placed*
+
+### hosting
+
+- *waitress*
+
+#### running in treminal
+
+``` Bash
+waitress-serve --port=8080 app:app
+```
+
+#### hosting from file
+
+``` python
+from waitress import serve
+
+
+serve(app, host='0.0.0.0', port=8080)
+```
