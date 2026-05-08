@@ -128,6 +128,26 @@ def dowload(f_id):
     if file['mimetype'].startswith("text/",0):
         decoded_data = base64.b64decode(file['data']).decode("utf-8")
     return render_template('download.html',file = file,decoded_data=decoded_data)
+
+@app.route("/get/<f_id>")
+def get(f_id):
+    conn = get_db_connection()
+    cursor = conn.cursor(dictionary=True)
+    cursor.execute(
+        "SELECT data, mimetype, name FROM files WHERE id = %s",(f_id,))
+    file = cursor.fetchone()
+    cursor.close()
+    conn.close()
+    if not file:
+        abort(404)
+    binary_data = base64.b64decode(file["data"])
+
+    return Response(
+        binary_data,
+        mimetype=file["mimetype"],
+        headers={
+            "Content-Disposition": f'inline; filename="{file["name"]}"'
+        })
 if __name__ == "__main__":
 
     app.run(debug=True,host='0.0.0.0', port=5000)
