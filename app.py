@@ -19,7 +19,7 @@ app.secret_key = os.getenv("skey")
 # Husk å endre host, user, password og database, slik at de er tilpasset dine instillinger 
 def get_db_connection():
     return mysql.connector.connect(
-        host="127.0.0.1",
+        host="10.200.14.13",
         user=user,
         password=pword,
         database="uploader"
@@ -117,7 +117,7 @@ def upload():
         return render_template('upload.html')
     
 @app.route("/download/<f_id>")
-def dowload(f_id):
+def download(f_id):
     conn = get_db_connection()
     cursor = conn.cursor(dictionary=True)
     cursor.execute("SELECT name,mimetype, data FROM files WHERE id = %s",(f_id,))
