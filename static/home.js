@@ -1,8 +1,9 @@
 let download_links = document.querySelectorAll(".download_links")
-console.log(download_links)
+let get_links = document.querySelectorAll(".get_links")
+// console.log(download_links,get_links)
 let base_massage = window.location.protocol+"//"+ window.location.host
-async function copy_msg(id){
-  let text = base_massage+"/download/"+id  
+async function copy_msg(id, loc){
+  let text = base_massage+"/"+loc+"/"+id  
   try {
     await navigator.clipboard.writeText(text);
     alert('link copied to clipboard');
@@ -31,6 +32,12 @@ async function copy_msg(id){
 for (let index = 0; index < download_links.length; index++) {
     const element = download_links[index];
     element.addEventListener("click",()=>{
-        copy_msg(element.id)
+        copy_msg(element.id,"download")
+    })
+}
+for (let index = 0; index < get_links.length; index++) {
+    const element = get_links[index];
+    element.addEventListener("click",()=>{
+        copy_msg(element.id,"get")
     })
 }
