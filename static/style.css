@@ -35,6 +35,9 @@ main .preview{
     padding: 5px; 
     object-fit:contain;
 }
+main embed.prview, main iframe.preview{
+    min-width: 60%;
+}
 main .files{
     background-color: var(--main);
     border-radius: 25px;
