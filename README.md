@@ -141,8 +141,7 @@ serve(app, host='0.0.0.0', port=5000)
 2. *install python if you havent already*
 
     ``` Bash
-       sudo apt install python3 python3-venv
-
+    sudo apt install python3 python3-venv
     ```
 
 3. *clone the projekt*
@@ -154,8 +153,9 @@ serve(app, host='0.0.0.0', port=5000)
 4. *create enviorment*
 
     ``` Bash
-     cd prove_examen/
-     python# -m venv .venv
+    cd prove_examen/
+    python3 -m venv .venv
+    source .venv/bin/activate
     ```
 
 5. *install libraries*
@@ -168,7 +168,7 @@ serve(app, host='0.0.0.0', port=5000)
 
     **add a .env file with theese lines:**
 
-    ``` csv
+    ``` .env
     p_word = "your password"
     user = "your username"
     skey = "secret key"
@@ -179,5 +179,5 @@ serve(app, host='0.0.0.0', port=5000)
 7. *running*
 
     ``` Bash
-        python app.py
+    python app.py
     ```
