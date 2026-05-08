@@ -32,7 +32,8 @@ main .preview{
     background-color: var(--main);
     border: solid var(--accent) 5px;
     border-radius: 5px;
-    padding: 5px;
+    padding: 5px; 
+    object-fit:contain;
 }
 main .files{
     background-color: var(--main);
