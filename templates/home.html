@@ -14,10 +14,11 @@
     </header>
     <main>
         <a href="{{url_for('upload')}}"><button>upload file</button></a>
-        <div>
+        <div class="files">
             {% for file in files%}
-            <div>
+            <div class="file">
                 <h3>{{file['name']}} ( <i>{{file['mimetype']}}</i> )</h3>
+                <a href="{{url_for('download',f_id=file['id'])}}"><button>open dowload link</button></a>
                 <button class="download_links" id="{{file['id']}}">copy download link</button>
                 <button class="get_links" id="{{file['id']}}">copy get link</button>
             </div>

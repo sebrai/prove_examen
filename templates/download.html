@@ -17,14 +17,31 @@
         {% endif %}
     </header>
     <main>
-        <a href="data:{{file['mimetype']}};base64,{{file['data']}}" download="{{file['name']}}"><button>download</button></a>
+        <a href="data:{{file['mimetype']}};base64,{{file['data']}}"
+            download="{{file['name']}}"><button>download</button></a>
+
         {% if file['mimetype'].startswith('image/',0) %}
         <img class="preview" src="data:{{file['mimetype']}};base64,{{file['data']}}" alt="{{file['name']}}">
-        {% endif %}
-        {% if file['mimetype'].startswith('text/',0) %}
-        <p>
+        
+        {% elif file['mimetype']== "text/html" %}
+        <iframe src="data:{{file['mimetype']}};base64,{{file['data']}}" frameborder="0" class="preview"></iframe>
+        
+        {% elif file['mimetype'].startswith('text/',0) %}
+        <p class="preview">
             {{decoded_data}}
         </p>
+        
+        {% elif file['mimetype'].startswith('audio/') %}
+        <audio controls>
+            <source src="data:{{file['mimetype']}};base64,{{file['data']}}" type="{{file['mimetype']}}">
+        </audio>
+        
+        {% elif file['mimetype'].startswith('video/') %}
+        <video controls class="preview">
+            <source src="data:{{file['mimetype']}};base64,{{file['data']}}" type="{{file['mimetype']}}">
+        </video>
+        {% else %}
+        <h1>{{file['name']}}</h1>
         {% endif %}
     </main>
     <footer>
