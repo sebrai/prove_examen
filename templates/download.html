@@ -24,7 +24,7 @@
         <img class="preview" src="data:{{file['mimetype']}};base64,{{file['data']}}" alt="{{file['name']}}">
         
         {% elif file['mimetype']== "text/html" %}
-        <iframe src="data:{{file['mimetype']}};base64,{{file['data']}}" frameborder="0" class="preview"></iframe>
+        <iframe src="data:{{file['mimetype']}};base64,{{file['data']}}" frameborder="0" class="preview" width="800" height="600" ></iframe>
         
         {% elif file['mimetype'].startswith('text/',0) %}
         <p class="preview">
@@ -40,6 +40,8 @@
         <video controls class="preview">
             <source src="data:{{file['mimetype']}};base64,{{file['data']}}" type="{{file['mimetype']}}">
         </video>
+        {% elif file['mimetype'] == "application/pdf" %}
+         <embed  src="data:{{file['mimetype']}};base64,{{file['data']}}" type="{{file['mimetype']}}"  class="preview"  width="800" height="800" >
         {% else %}
         <h1>{{file['name']}}</h1>
         {% endif %}
