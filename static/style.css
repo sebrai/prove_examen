@@ -21,6 +21,10 @@ main{
 main >*{
     margin: 20px;
 }
+main .preview{
+    max-width: 60%;
+    max-height: 90%;
+}
 header{
 background-color: var(--second);
 position: fixed;

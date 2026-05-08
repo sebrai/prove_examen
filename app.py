@@ -115,10 +115,23 @@ def upload():
         return redirect(url_for('home'))
     else:
         return render_template('upload.html')
+    
+@app.route("/download/<f_id>")
+def dowload(f_id):
+    conn = get_db_connection()
+    cursor = conn.cursor(dictionary=True)
+    cursor.execute("SELECT name,mimetype, data FROM files WHERE id = %s",(f_id,))
+    file = cursor.fetchone()
+    cursor.close()
+    conn.close()
+    decoded_data = '<b style="color:red;">error: file isnt text</b>'
+    if file['mimetype'].startswith("text/",0):
+        decoded_data = base64.b64decode(file['data']).decode("utf-8")
+    return render_template('download.html',file = file,decoded_data=decoded_data)
 if __name__ == "__main__":
 
     app.run(debug=True,host='0.0.0.0', port=5000)
     #running normaly^
 
     #serve(app, host='0.0.0.0', port=5000)
-    #run with waitressadded install
+    #run with waitress installed

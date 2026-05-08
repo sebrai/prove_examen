@@ -131,7 +131,7 @@ serve(app, host='0.0.0.0', port=5000)
 
 ### running
 
- 1. *requires git to copy*
+1. *requires git to copy*
 
     ``` Bash
     winget install --id Git.Git -e --source winget
