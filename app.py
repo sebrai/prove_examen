@@ -148,6 +148,18 @@ def get(f_id):
         headers={
             "Content-Disposition": f'inline; filename="{file["name"]}"'
         })
+
+@app.route("/help")
+def help():
+    return render_template("faq.html")
+
+@app.route("/question", methods=["GET","POST"])
+def askq():
+    if request.method == "POST":
+        pass
+    else:
+        return redirect(url_for("help"))
+    
 if __name__ == "__main__":
 
     app.run(debug=True,host='0.0.0.0', port=5000)
