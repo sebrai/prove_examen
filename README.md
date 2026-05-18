@@ -46,6 +46,22 @@
     +-----------+--------------+------+-----+---------+-------+
 ```
 
+**questions:**
+
+``` sql
+    +-----------+--------------+------+-----+-----------+-------+
+    | Field     | Type         | Null | Key | Default   | Extra |
+    +-----------+--------------+------+-----+-----------+-------+
+    | id        | uuid         | NO   |     | uuid()    |       |
+    | u_id      | uuid         | NO   | MUL | NULL      |       |
+    | content   | varchar(255) | NO   |     | NULL      |       |
+    | sent      | date         | NO   |     | curdate() |       |
+    | responded | tinyint(1)   | NO   |     | 0         |       |
+    | responce  | varchar(255) | YES  |     |           |       |
+    | r_id      | uuid         | NO   | MUL | uuid()    |       |
+    +-----------+--------------+------+-----+-----------+-------+
+    ```
+
 ### two database hosts
 
 **currently i have two ways to host my backend database:**

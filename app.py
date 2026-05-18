@@ -156,10 +156,18 @@ def help():
 @app.route("/question", methods=["GET","POST"])
 def askq():
     if request.method == "POST":
-        pass
+        if  not session.get('id'):
+            return redirect(url_for('login'))
+        content = request.form["q"]
+        conn = get_db_connection()
+        cursor = conn.cursor(dictionary=True)
+        cursor.execute("INSERT INTO questions(u_id,content) VALUES (%s,%s)",(session.get("id"),content))
+        conn.commit()
+        cursor.close()
+        conn.close()
     else:
         return redirect(url_for("help"))
-    
+
 if __name__ == "__main__":
 
     app.run(debug=True,host='0.0.0.0', port=5000)
