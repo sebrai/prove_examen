@@ -1,19 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FAQ: uploader</title>
     <link rel="stylesheet" href="{{url_for('static',filename='style.css')}}">
 </head>
+
 <body>
+    <main>
+        <div class="q">
+            <h2>FAQ:</h2>
+            <p>how do i upload a file?</p>
+            <h4>responce</h4>
+            <p>go to home and click "upload file" if you arent logged in log in or register if you dont have an account</p>
+        </div>
+        {% for q in qs %}
+        <div class="q">
+            <h2>{{q.username}}</h2>
+            <p> {{q.content}} </p>
+            <small> {{q.sent}} </small> <br>
+            {% if session['role'] == 'admin' and q.responded == 0 %}
+            <form action="{{url_for('resq',id = q.id)}}" method="post">
+                <input type="text" name="r" id="r" placeholder="responce">
+                <input type="submit" value="submit responce">
+            </form>
+            {% endif %}
+            <br>
+            {% if q.responded %}
+            <h4> responce from: {{q.respondent}} </h4>
+            <p> {{q.responce}} </p>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </main>
     <footer>
-        {% if not session.get("id") %}
+        {% if session.get("id") %}
         <form action="{{url_for('askq')}}" method="post">
             <input type="text" name="q" id="q">
             <input type="submit" value="submit question">
         </form>
-        {[% endif %]}
+        <a href="{{url_for('home')}}"><button>back to home</button></a>
+        {% endif %}
     </footer>
 </body>
+
 </html>

@@ -58,7 +58,7 @@
     | sent      | date         | NO   |     | curdate() |       |
     | responded | tinyint(1)   | NO   |     | 0         |       |
     | responce  | varchar(255) | YES  |     |           |       |
-    | r_id      | uuid         | NO   | MUL | uuid()    |       |
+    | r_id      | uuid         | YES  | MUL | NULL      |       |
     +-----------+--------------+------+-----+-----------+-------+
     ```
 

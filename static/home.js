@@ -41,3 +41,6 @@ for (let index = 0; index < get_links.length; index++) {
         copy_msg(element.id,"get")
     })
 }
+function showf(){
+  document.querySelector('#form').hidden = !document.querySelector('#form').hidden
+}

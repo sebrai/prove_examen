@@ -19,7 +19,7 @@ app.secret_key = os.getenv("skey")
 # Husk å endre host, user, password og database, slik at de er tilpasset dine instillinger 
 def get_db_connection():
     return mysql.connector.connect(
-        host="10.200.14.13",
+        host="127.0.0.1",
         user=user,
         password=pword,
         database="uploader"
@@ -94,6 +94,23 @@ def home():
     conn.close()
     return render_template('home.html',files= files)
 
+@app.route("/setuser/<id>", methods = ["GET","POST"])
+def setuser(id):
+    if request.method == "POST":
+        if  not session.get('id'):
+            return redirect(url_for('login'))
+        if session['id'] != id and session['role'] != "admin":
+            return redirect(url_for("home"))
+        name = request.form['name']
+        email = request.form['email']
+        conn = get_db_connection()
+        cursor = conn.cursor(dictionary=True)
+        cursor.execute("UPDATE users SET name = %s, email = %s WHERE id = %s",(name,email,id))
+        conn.commit()
+        cursor.close()
+        conn.close()
+    return redirect(url_for("home"))
+
 @app.route("/upload",methods = ["GET","POST"])
 def upload():
     if  not session.get('id'):
@@ -151,7 +168,14 @@ def get(f_id):
 
 @app.route("/help")
 def help():
-    return render_template("faq.html")
+    conn = get_db_connection()
+    cursor = conn.cursor(dictionary=True)
+    cursor.execute("SELECT  q.id, q.content, q.sent,q.responded,q.responce, u.name AS username, r.name AS respondent FROM questions q JOIN users u ON u.id = q.u_id  LEFT JOIN users r ON r.id = q.r_id AND q.responded = 1")
+    qs = cursor.fetchall()
+    cursor.close()
+    conn.close()
+    # print(qs)
+    return render_template("faq.html",qs = qs)
 
 @app.route("/question", methods=["GET","POST"])
 def askq():
@@ -165,8 +189,26 @@ def askq():
         conn.commit()
         cursor.close()
         conn.close()
-    else:
-        return redirect(url_for("help"))
+    return redirect(url_for("help"))
+
+
+@app.route("/respond/<id>", methods=["GET","POST"])
+def resq(id):
+    if request.method == "POST":
+        if  not session.get('id'):
+            return redirect(url_for('login'))
+        if not session['role'] == "admin":
+            return redirect(url_for("help"))
+        content = request.form["r"]
+        conn = get_db_connection()
+        cursor = conn.cursor(dictionary=True)
+        cursor.execute("UPDATE questions SET responded = 1, responce = %s, r_id = %s WHERE id = %s",(content,session['id'],id))
+        conn.commit()
+        cursor.close()
+        conn.close()
+    
+    return redirect(url_for("help"))
+
 
 if __name__ == "__main__":
 

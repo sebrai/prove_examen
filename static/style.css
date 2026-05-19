@@ -54,6 +54,14 @@ main .files .file{
     padding: 10px;
     width: 45%;
 }
+main .q{
+    background-color: var(--main);
+    border-radius: 25px;
+    border: var(--accent) solid 5px;
+}
+main .q >*{
+    margin: 10px;
+}
 header{
 background-color: var(--second);
 position: fixed;

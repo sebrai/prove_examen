@@ -27,6 +27,12 @@
     </main>
     <footer>
         <a href="{{url_for('logout')}}"><button>logout</button></a>
+        <button id="showf" onclick="showf()">change user details</button>
+        <form action="{{url_for('setuser',id = session['id'])}}" method="post" id="form" hidden>
+            <input type="text" name="name" id="" value="{{session['name']}}">
+            <input type="text" name="email" id="" value="{{session['email']}}">
+            <input type="submit" value="submit">
+        </form>
     </footer>
 
 </body>
