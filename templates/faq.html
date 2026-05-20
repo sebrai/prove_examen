@@ -10,15 +10,35 @@
 
 <body>
     <main>
-        <div class="q">
+        <button onclick="hidesec('#faq')">hide faq</button>
+        <button onclick="hidesec('#uq')">hide user questions</button>
+        <div class="q" id="faq">
+            <h2>FAQ:</h2>
+            <p>how do i log in?</p>
+            <h4>responce</h4>
+            <p>if you arent logged in alredy click log in in the footer, if you have the option click back to home then logout</p>
+        </div>
+        <div class="q" id="faq">
             <h2>FAQ:</h2>
             <p>how do i upload a file?</p>
             <h4>responce</h4>
             <p>go to home and click "upload file" if you arent logged in log in or register if you dont have an account</p>
         </div>
+        <div class="q" id="faq">
+            <h2>FAQ:</h2>
+            <p>how do i gave others acces to my uploaded file?</p>
+            <h4>responce</h4>
+            <p>simply click "copy download link" or "copy get link" on the file in the homescreen and give them the link</p>
+        </div>
+        <div class="q" id="faq">
+            <h2>FAQ:</h2>
+            <p>how can i delete an uploaded file</p>
+            <h4>responce</h4>
+            <p>currently not possible, but a solution is being worked on, for now just send a question about it and an admin will do it for you</p>
+        </div>
         {% for q in qs %}
-        <div class="q">
-            <h2>{{q.username}}</h2>
+        <div class="q" id="uq">
+            <h2>by: {{q.username}}</h2>
             <p> {{q.content}} </p>
             <small> {{q.sent}} </small> <br>
             {% if session['role'] == 'admin' and q.responded == 0 %}
@@ -31,6 +51,8 @@
             {% if q.responded %}
             <h4> responce from: {{q.respondent}} </h4>
             <p> {{q.responce}} </p>
+            {% elif session['role'] != "admin" %}
+              <i>no responce given</i>
             {% endif %}
         </div>
         {% endfor %}
@@ -42,8 +64,18 @@
             <input type="submit" value="submit question">
         </form>
         <a href="{{url_for('home')}}"><button>back to home</button></a>
+        {% else %}
+        <a href="{{url_for('login')}}"><button>login</button></a>
         {% endif %}
     </footer>
 </body>
-
+<script>
+    function hidesec(type){
+        let items = document.querySelectorAll(type)
+        for (let i = 0; i< items.length;i++){
+            element = items[i]
+            element.style.display =element.style.display != "none" ? "none" : "block"
+        }
+    }
+</script>
 </html>

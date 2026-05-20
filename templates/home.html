@@ -18,7 +18,7 @@
             {% for file in files%}
             <div class="file">
                 <h3>{{file['name']}} ( <i>{{file['mimetype']}}</i> )</h3>
-                <a href="{{url_for('download',f_id=file['id'])}}"><button>open dowload link</button></a>
+                <a href="{{url_for('download',f_id=file['id'])}}"><button>open dowload page</button></a>
                 <button class="download_links" id="{{file['id']}}">copy download link</button>
                 <button class="get_links" id="{{file['id']}}">copy get link</button>
             </div>
@@ -33,6 +33,7 @@
             <input type="text" name="email" id="" value="{{session['email']}}">
             <input type="submit" value="submit">
         </form>
+        <a href="{{url_for('help')}}"><button>FAQ <b>/</b> ask question </button></a>
     </footer>
 
 </body>

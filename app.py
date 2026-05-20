@@ -146,7 +146,7 @@ def download(f_id):
         decoded_data = base64.b64decode(file['data']).decode("utf-8")
     return render_template('download.html',file = file,decoded_data=decoded_data)
 
-@app.route("/get/<f_id>")
+@app.route("/get/<f_id>", methods=['GET', 'PROPFIND'])
 def get(f_id):
     conn = get_db_connection()
     cursor = conn.cursor(dictionary=True)
