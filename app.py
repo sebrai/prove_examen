@@ -111,6 +111,20 @@ def setuser(id):
         conn.close()
     return redirect(url_for("home"))
 
+@app.route("/remove_user/<id>")
+def r_user(id):
+    if  not session.get('id'):
+        return redirect(url_for('login'))
+    if session['id'] != id and session['role'] != "admin":
+        return redirect(url_for("home"))
+    conn = get_db_connection()
+    cursor = conn.cursor(dictionary=True)
+    cursor.execute("UPDATE users SET name = 'deleted-user', email = %s , password = 'deleted-password' WHERE id = %s",("deleted-email-"+id+"@uploader.net",id))
+    conn.commit()
+    cursor.close()
+    conn.close()
+    return redirect(url_for("logout"))
+
 @app.route("/upload",methods = ["GET","POST"])
 def upload():
     if  not session.get('id'):

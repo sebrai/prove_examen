@@ -34,6 +34,10 @@
             <input type="submit" value="submit">
         </form>
         <a href="{{url_for('help')}}"><button>FAQ <b>/</b> ask question </button></a>
+        {%if session['role'] != 'admin' %}
+
+        <a href="{{url_for('r_user',id = session['id'])}}" onclick="return confirm('are you sure you want to delete your user forever, this action can not be reversed')"><button>delete user</button></a>
+        {% endif %}
     </footer>
 
 </body>
