@@ -4,6 +4,8 @@
 
 - *vise fram mitt nåværende database og kode*
 
+- *vise fram kanban boardet mitt*
+
 - *forklare hvorfor det jeg gjør er viktig*
 
 - *legge til route for å endre bruker detaljer med form*
